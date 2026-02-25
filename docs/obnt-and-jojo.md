@@ -8,23 +8,23 @@ Unlike traditional JSON libraries that rely on dedicated AST node hierarchies, *
 
 ```mermaid
 graph BT
-    node(("<Object><br/>Object-Based Node Tree"))
+    node(("&lt;Object&gt;<br/>Object-Based Node Tree"))
     node --> object(("JSON Object<br/>{ }"))
         object --> map("Map")
         object --> jo("JsonObject")
-            jo --> jojo("<JOJO><br/>(extends JsonObject)")
-        object --> pojo("<POJO>")
+            jo --> jojo("&lt;JOJO&gt;<br/>(extends JsonObject)")
+        object --> pojo("&lt;POJO&gt;")
     node --> array(("JSON Array<br/>[ ]"))
         array --> list("List")
         array --> ja("JsonArray")
-            ja --> jajo("<JAJO><br/>(extends JsonArray)")
+            ja --> jajo("&lt;JAJO&gt;<br/>(extends JsonArray)")
         array --> arr("Array")
-        array --> set("Set")
+        array ---> set("Set")
     node --> value(("JSON Value<br/>..."))
         value --> string("String")
         value --> number("Number")
         value --> boolean("Boolean")
-        value --> nodeValue("<NodeValue>")
+        value ---> nodeValue("&lt;NodeValue&gt;")
 ```
 
 ### JSON Object (`{}`)

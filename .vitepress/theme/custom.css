@@ -1,0 +1,69 @@
+.hero-badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+  margin-bottom: 2px;
+}
+
+.hero-badges a {
+  display: inline-flex;
+  text-decoration: none;
+  border: 0;
+}
+
+.VPHero {
+  padding-top: calc(var(--vp-nav-height) + var(--vp-layout-top-height, 0px) + 44px) !important;
+  padding-bottom: 14px !important;
+}
+
+.VPHero .container {
+  max-width: 860px;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.VPHero .name {
+  font-size: clamp(40px, 6.8vw, 56px);
+  line-height: 1.04;
+}
+
+.VPHero .text {
+  font-size: clamp(24px, 4.3vw, 36px);
+  line-height: 1.14;
+}
+
+@media (max-width: 768px) {
+  .VPHero {
+    padding-top: calc(var(--vp-nav-height) + var(--vp-layout-top-height, 0px) + 32px) !important;
+    padding-bottom: 10px !important;
+  }
+
+  .hero-badges {
+    margin-top: 10px;
+    margin-bottom: 2px;
+  }
+
+  .hero-badges img {
+    max-height: 20px;
+  }
+}
+
+@media (min-width: 700px) and (max-width: 767px) {
+  .VPNavBarMenu {
+    display: flex !important;
+  }
+
+  .VPNavBarHamburger {
+    display: none !important;
+  }
+
+  .VPNavBarSearch {
+    padding-left: 12px !important;
+  }
+
+  .VPNavBarMenuLink {
+    padding: 0 8px !important;
+  }
+}
