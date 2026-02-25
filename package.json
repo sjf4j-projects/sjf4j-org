@@ -1,0 +1,26 @@
+{
+  "name": "sjf4j-org",
+  "version": "1.0.0",
+  "description": "Website: [sjf4j.org](https://sjf4j.org) — official documentation and landing page for [SJF4J](https://github.com/sjf4j-projects/sjf4j).",
+  "main": "index.js",
+  "scripts": {
+    "docs:dev": "vitepress dev",
+    "docs:build": "vitepress build",
+    "docs:preview": "vitepress preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sjf4j-projects/sjf4j-org.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/sjf4j-projects/sjf4j-org/issues"
+  },
+  "homepage": "https://github.com/sjf4j-projects/sjf4j-org#readme",
+  "devDependencies": {
+    "vitepress": "^1.6.4"
+  }
+}

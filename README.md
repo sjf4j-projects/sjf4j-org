@@ -2,33 +2,126 @@
 
 Website: [sjf4j.org](https://sjf4j.org) — official documentation and landing page for [SJF4J](https://github.com/sjf4j-projects/sjf4j).
 
-## Local Preview
+Built with [VitePress](https://vitepress.dev/). Documentation is written in Markdown and compiled to static HTML.
 
-The site is pure static HTML/CSS/JS — no build step required. Just serve the repository root with any local HTTP server.
+## Prerequisites
 
-### Option 1 — Python (built-in, recommended)
+- [Node.js](https://nodejs.org/) 18+
 
-```bash
-# Python 3
-python3 -m http.server 8080
-
-# Python 2
-python -m SimpleHTTPServer 8080
-```
-
-Then open <http://localhost:8080> in your browser.
-
-### Option 2 — Node.js
+## Setup
 
 ```bash
-npx serve .
+npm install
 ```
 
-Then open the URL shown in the terminal (default: <http://localhost:3000>).
+## Local Development
 
-### Option 3 — VS Code Live Server
+```bash
+npm run docs:dev
+```
 
-1. Install the [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) extension.
-2. Right-click `index.html` → **Open with Live Server**.
+Then open <http://localhost:5173> in your browser. Changes to `.md` files are reflected in real time.
 
-> **Note**: Opening `index.html` directly as a `file://` URL may cause some CDN resources (Mermaid, Prism) to load with mixed-content restrictions in certain browsers. Using a local HTTP server avoids this.
+## Build
+
+```bash
+npm run docs:build
+```
+
+The static site is generated into `.vitepress/dist/`.
+
+## Preview Production Build
+
+```bash
+npm run docs:preview
+```
+
+## Writing Docs
+
+All documentation lives in Markdown files:
+
+| File | Content |
+|---|---|
+| `index.md` | Homepage |
+| `docs/obnt-and-jojo.md` | OBNT & JOJO introduction |
+| `docs/basic-operations.md` | JsonObject, JsonArray, NodeStream |
+| `docs/jsonpath.md` | JsonPath & JsonPointer |
+| `docs/jsonpatch.md` | JsonPatch |
+| `docs/jsonschema.md` | JsonSchema & @ValidJsonSchema |
+| `docs/benchmark.md` | Benchmark results |
+| `docs/faq.md` | FAQ |
+
+## Adding a New Page
+
+Only two steps are needed — create the Markdown file and register it in the sidebar.
+
+### Step 1 — Create the Markdown file
+
+Add a new `.md` file under `docs/`. For example, `docs/new-feature.md`:
+
+```markdown
+# New Feature
+
+Describe the new feature here. Standard Markdown is supported,
+plus VitePress extensions like code groups, custom containers, etc.
+
+## Section One
+
+Regular text, **bold**, `inline code`, [links](https://example.com).
+
+### Code Example
+
+```java
+JsonObject jo = JsonObject.fromJson("{\"hello\":\"world\"}");
+```
+
+::: tip
+VitePress custom containers are supported — `tip`, `info`, `warning`, `danger`, `details`.
+:::
+```
+
+### Step 2 — Register in the sidebar
+
+Open `.vitepress/config.mts` and add an entry to the `sidebar` → `items` array:
+
+```ts
+sidebar: [
+  {
+    text: 'Guide',
+    items: [
+      { text: 'OBNT & JOJO', link: '/docs/obnt-and-jojo' },
+      { text: 'Basic Operations', link: '/docs/basic-operations' },
+      // ...existing items...
+      { text: 'New Feature', link: '/docs/new-feature' },   // ← add here
+    ],
+  },
+],
+```
+
+### Step 3 — Preview locally
+
+```bash
+npm run docs:dev
+```
+
+Open <http://localhost:5173> — the new page appears in the sidebar instantly. Edits to the `.md` file are reflected in real time (hot reload).
+
+### Step 4 — Push to deploy
+
+```bash
+git add docs/new-feature.md .vitepress/config.mts
+git commit -m "docs: add new-feature page"
+git push
+```
+
+GitHub Actions (`.github/workflows/deploy.yml`) will automatically build the VitePress site and deploy it to GitHub Pages. No manual build or upload is needed.
+
+### Summary
+
+```
+docs/new-feature.md          ← write Markdown here
+.vitepress/config.mts        ← register in sidebar here
+git push                     ← auto-build & deploy
+```
+
+That's it — you only write Markdown. VitePress compiles it to static HTML automatically.
