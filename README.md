@@ -2,33 +2,53 @@
 
 Website: [sjf4j.org](https://sjf4j.org) — official documentation and landing page for [SJF4J](https://github.com/sjf4j-projects/sjf4j).
 
-## Local Preview
+Built with [VitePress](https://vitepress.dev/). Documentation is written in Markdown and compiled to static HTML.
 
-The site is pure static HTML/CSS/JS — no build step required. Just serve the repository root with any local HTTP server.
+## Prerequisites
 
-### Option 1 — Python (built-in, recommended)
+- [Node.js](https://nodejs.org/) 18+
 
-```bash
-# Python 3
-python3 -m http.server 8080
-
-# Python 2
-python -m SimpleHTTPServer 8080
-```
-
-Then open <http://localhost:8080> in your browser.
-
-### Option 2 — Node.js
+## Setup
 
 ```bash
-npx serve .
+npm install
 ```
 
-Then open the URL shown in the terminal (default: <http://localhost:3000>).
+## Local Development
 
-### Option 3 — VS Code Live Server
+```bash
+npm run docs:dev
+```
 
-1. Install the [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) extension.
-2. Right-click `index.html` → **Open with Live Server**.
+Then open <http://localhost:5173> in your browser. Changes to `.md` files are reflected in real time.
 
-> **Note**: Opening `index.html` directly as a `file://` URL may cause some CDN resources (Mermaid, Prism) to load with mixed-content restrictions in certain browsers. Using a local HTTP server avoids this.
+## Build
+
+```bash
+npm run docs:build
+```
+
+The static site is generated into `.vitepress/dist/`.
+
+## Preview Production Build
+
+```bash
+npm run docs:preview
+```
+
+## Writing Docs
+
+All documentation lives in Markdown files:
+
+| File | Content |
+|---|---|
+| `index.md` | Homepage |
+| `docs/obnt-and-jojo.md` | OBNT & JOJO introduction |
+| `docs/basic-operations.md` | JsonObject, JsonArray, NodeStream |
+| `docs/jsonpath.md` | JsonPath & JsonPointer |
+| `docs/jsonpatch.md` | JsonPatch |
+| `docs/jsonschema.md` | JsonSchema & @ValidJsonSchema |
+| `docs/benchmark.md` | Benchmark results |
+| `docs/faq.md` | FAQ |
+
+To add a new page, create a `.md` file and add it to the sidebar in `.vitepress/config.mts`.
