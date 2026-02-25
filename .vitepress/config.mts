@@ -1,6 +1,7 @@
 import { defineConfig } from 'vitepress'
+import { withMermaid } from 'vitepress-plugin-mermaid'
 
-export default defineConfig({
+export default withMermaid(defineConfig({
   title: 'SJF4J',
   description: 'Simple JSON Facade for Java — a unified semantic layer for structured data processing.',
   ignoreDeadLinks: true,
@@ -52,4 +53,4 @@ export default defineConfig({
       provider: 'local',
     },
   },
-})
+}))
