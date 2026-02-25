@@ -51,4 +51,77 @@ All documentation lives in Markdown files:
 | `docs/benchmark.md` | Benchmark results |
 | `docs/faq.md` | FAQ |
 
-To add a new page, create a `.md` file and add it to the sidebar in `.vitepress/config.mts`.
+## Adding a New Page
+
+Only two steps are needed — create the Markdown file and register it in the sidebar.
+
+### Step 1 — Create the Markdown file
+
+Add a new `.md` file under `docs/`. For example, `docs/new-feature.md`:
+
+```markdown
+# New Feature
+
+Describe the new feature here. Standard Markdown is supported,
+plus VitePress extensions like code groups, custom containers, etc.
+
+## Section One
+
+Regular text, **bold**, `inline code`, [links](https://example.com).
+
+### Code Example
+
+```java
+JsonObject jo = JsonObject.fromJson("{\"hello\":\"world\"}");
+```
+
+::: tip
+VitePress custom containers are supported — `tip`, `info`, `warning`, `danger`, `details`.
+:::
+```
+
+### Step 2 — Register in the sidebar
+
+Open `.vitepress/config.mts` and add an entry to the `sidebar` → `items` array:
+
+```ts
+sidebar: [
+  {
+    text: 'Guide',
+    items: [
+      { text: 'OBNT & JOJO', link: '/docs/obnt-and-jojo' },
+      { text: 'Basic Operations', link: '/docs/basic-operations' },
+      // ...existing items...
+      { text: 'New Feature', link: '/docs/new-feature' },   // ← add here
+    ],
+  },
+],
+```
+
+### Step 3 — Preview locally
+
+```bash
+npm run docs:dev
+```
+
+Open <http://localhost:5173> — the new page appears in the sidebar instantly. Edits to the `.md` file are reflected in real time (hot reload).
+
+### Step 4 — Push to deploy
+
+```bash
+git add docs/new-feature.md .vitepress/config.mts
+git commit -m "docs: add new-feature page"
+git push
+```
+
+GitHub Actions (`.github/workflows/deploy.yml`) will automatically build the VitePress site and deploy it to GitHub Pages. No manual build or upload is needed.
+
+### Summary
+
+```
+docs/new-feature.md          ← write Markdown here
+.vitepress/config.mts        ← register in sidebar here
+git push                     ← auto-build & deploy
+```
+
+That's it — you only write Markdown. VitePress compiles it to static HTML automatically.
