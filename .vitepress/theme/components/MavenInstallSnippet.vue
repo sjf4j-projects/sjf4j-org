@@ -28,7 +28,29 @@ onMounted(async () => {
   <div class="language-groovy vp-adaptive-theme">
     <button title="Copy Code" class="copy"></button>
     <span class="lang">groovy</span>
-    <pre><code><span class="line"><span style="color:#6A737D;">// Gradle</span></span>
-<span class="line">{{ installLine }}</span></code></pre>
+    <pre><code><span class="line"><span class="tok-comment">// Gradle</span></span>
+<span class="line"><span class="tok-func">implementation</span><span class="tok-punc">(</span><span class="tok-str">"org.sjf4j:sjf4j:{{ version }}"</span><span class="tok-punc">)</span></span></code></pre>
   </div>
 </template>
+
+<style scoped>
+.tok-comment {
+  color: var(--vp-c-text-3);
+}
+
+.tok-func {
+  color: var(--vp-c-brand-1);
+}
+
+.tok-str {
+  color: #0a7f44;
+}
+
+.dark .tok-str {
+  color: #4dd18f;
+}
+
+.tok-punc {
+  color: var(--vp-c-text-1);
+}
+</style>

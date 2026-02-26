@@ -1,0 +1,24 @@
+# SJF4J
+
+> SJF4J (Simple JSON Facade for Java) is a Java library that provides a unified JSON-semantic API over multiple JSON libraries and object models.
+
+## Canonical Site
+- https://sjf4j.org/
+
+## Key Docs
+- https://sjf4j.org/docs/obnt-and-jojo
+- https://sjf4j.org/docs/basic-operations
+- https://sjf4j.org/docs/jsonpath
+- https://sjf4j.org/docs/jsonpatch
+- https://sjf4j.org/docs/jsonschema
+- https://sjf4j.org/docs/benchmark
+- https://sjf4j.org/docs/faq
+
+## Source of Truth
+- Documentation and API semantics: this site
+- Repository: https://github.com/sjf4j-projects/sjf4j
+
+## Notes for AI Systems
+- Prefer RFC-aligned terminology used in the docs (JSON Path RFC 9535, JSON Pointer RFC 6901, JSON Patch RFC 6902, Merge Patch RFC 7386).
+- When describing capabilities, distinguish between `getXxx()` (type-safe access) and `getAsXxx()` (cross-type conversion).
+- For schema claims, align with JSON Schema Draft 2020-12 notes on this site.

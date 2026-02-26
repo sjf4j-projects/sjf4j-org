@@ -4,7 +4,7 @@ layout: home
 hero:
   name: SJF4J
   text: Simple JSON Facade for Java
-  tagline: Unifying JSON-Oriented Java
+  tagline: Unifying JSON-Oriented Java Development
 ---
 
 <div class="vp-doc" style="max-width: 860px; margin: 0 auto; padding: 0.1rem 1.5rem 2rem;">
