@@ -18,12 +18,19 @@ function normalizePath(relativePath: string): string {
 
 export default withMermaid(defineConfig({
   title: 'SJF4J',
-  description: 'Simple JSON Facade for Java — a unified semantic layer for structured data processing.',
+  description: 'Simple JSON Facade for Java — A Unified JSON Semantic Layer',
   ignoreDeadLinks: true,
   srcExclude: ['README.md'],
 
   head: [
     ['link', { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }],
+    ['script', { async: '', src: 'https://www.googletagmanager.com/gtag/js?id=G-KBSJRCWQ4V' }],
+    ['script', {}, `
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-KBSJRCWQ4V');
+    `],
     ['meta', { name: 'author', content: 'sjf4j-projects' }],
     ['meta', { name: 'robots', content: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1' }],
     ['meta', { property: 'og:title', content: 'SJF4J — Simple JSON Facade for Java' }],
@@ -96,6 +103,7 @@ export default withMermaid(defineConfig({
           { text: 'JsonPatch', link: '/docs/jsonpatch' },
           { text: 'JsonSchema', link: '/docs/jsonschema' },
           { text: 'Benchmark', link: '/docs/benchmark' },
+          { text: '────────' },
           { text: 'FAQ', link: '/docs/faq' },
         ],
       },
@@ -106,8 +114,8 @@ export default withMermaid(defineConfig({
     ],
 
     footer: {
-      message: 'Released under the <a href="https://opensource.org/licenses/MIT" target="_blank" rel="noreferrer">MIT License</a>. JSON Specs: <a href="https://www.rfc-editor.org/rfc/rfc8259" target="_blank" rel="noreferrer">RFC 8259</a> | <a href="https://www.rfc-editor.org/rfc/rfc6901" target="_blank" rel="noreferrer">RFC 6901</a> | <a href="https://www.rfc-editor.org/rfc/rfc6902" target="_blank" rel="noreferrer">RFC 6902</a> | <a href="https://www.rfc-editor.org/rfc/rfc7386" target="_blank" rel="noreferrer">RFC 7386</a> | <a href="https://www.rfc-editor.org/rfc/rfc9535" target="_blank" rel="noreferrer">RFC 9535</a>',
-      copyright: '© 2026 sjf4j-projects',
+      message: 'Released under the <a href="https://opensource.org/licenses/MIT" target="_blank" rel="noreferrer">MIT License</a>. JSON Specs: <a href="https://www.rfc-editor.org/rfc/rfc8259" target="_blank" rel="noreferrer">RFC 8259</a> | <a href="https://www.rfc-editor.org/rfc/rfc6901" target="_blank" rel="noreferrer">RFC 6901</a> | <a href="https://www.rfc-editor.org/rfc/rfc6902" target="_blank" rel="noreferrer">RFC 6902</a> | <a href="https://www.rfc-editor.org/rfc/rfc7386" target="_blank" rel="noreferrer">RFC 7386</a> | <a href="https://www.rfc-editor.org/rfc/rfc9535" target="_blank" rel="noreferrer">RFC 9535</a> | <a href="https://json-schema.org" target="_blank" rel="noreferrer">JSON Schema</a>',
+      copyright: '© 2026 sjf4j.org',
     },
 
     search: {

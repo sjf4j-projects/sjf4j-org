@@ -16,20 +16,6 @@ const theme: Theme = {
           h(
             'a',
             {
-              href: 'https://github.com/sjf4j-projects/sjf4j/actions/workflows/gradle.yml?query=branch%3Amain',
-              target: '_blank',
-              rel: 'noreferrer',
-            },
-            [
-              h('img', {
-                alt: 'Build',
-                src: 'https://img.shields.io/github/actions/workflow/status/sjf4j-projects/sjf4j/gradle.yml?branch=main',
-              }),
-            ]
-          ),
-          h(
-            'a',
-            {
               href: 'https://github.com/sjf4j-projects/sjf4j/blob/main/LICENSE',
               target: '_blank',
               rel: 'noreferrer',
@@ -38,6 +24,20 @@ const theme: Theme = {
               h('img', {
                 alt: 'License',
                 src: 'https://img.shields.io/github/license/sjf4j-projects/sjf4j',
+              }),
+            ]
+          ),
+          h(
+            'a',
+            {
+              href: 'https://bowtie.report/#/implementations/java-sjf4j',
+              target: '_blank',
+              rel: 'noreferrer',
+            },
+            [
+              h('img', {
+                alt: 'Supported Dialects',
+                src: 'https://img.shields.io/endpoint?url=https%3A%2F%2Fbowtie.report%2Fbadges%2Fjava-org.sjf4j-sjf4j%2Fsupported_versions.json',
               }),
             ]
           ),
@@ -64,8 +64,8 @@ const theme: Theme = {
             },
             [
               h('img', {
-                alt: 'Stars',
-                src: 'https://img.shields.io/github/stars/sjf4j-projects/sjf4j?style=social',
+                alt: 'Build',
+                src: 'https://img.shields.io/github/actions/workflow/status/sjf4j-projects/sjf4j/gradle.yml?branch=main',
               }),
             ]
           ),
@@ -78,8 +78,8 @@ const theme: Theme = {
             },
             [
               h('img', {
-                alt: 'Supported Dialects',
-                src: 'https://img.shields.io/endpoint?url=https%3A%2F%2Fbowtie.report%2Fbadges%2Fjava-org.sjf4j-sjf4j%2Fsupported_versions.json',
+                alt: 'GitHub',
+                src: 'https://img.shields.io/github/stars/sjf4j-projects/sjf4j?style=social',
               }),
             ]
           ),

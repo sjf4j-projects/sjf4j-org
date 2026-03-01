@@ -4,7 +4,7 @@ layout: home
 hero:
   name: SJF4J
   text: Simple JSON Facade for Java
-  tagline: Unifying JSON-Oriented Java Development
+  tagline: A Unified JSON Semantic Layer
 ---
 
 <div class="vp-doc" style="max-width: 860px; margin: 0 auto; padding: 0.1rem 1.5rem 2rem;">
@@ -15,7 +15,10 @@ hero:
 
 ## Overview
 
-**SJF4J (Simple JSON Facade for Java)** is a simple facade over multiple JSON libraries, providing a unified semantic layer for structured data processing grounded in JSON specifications.
+**SJF4J** is a Simple JSON Facade for Java, and also a Unified JSON Semantic Layer for Java. 
+
+
+a simple facade over multiple JSON libraries, providing a unified semantic layer for structured data processing grounded in JSON specifications.
 
 Rather than reinventing the wheel, SJF4J sits on top of popular parsers - Jackson, Gson, Fastjson2 - and exposes a consistent, expressive API across all of them. You switch parsers by swapping a dependency; your application code stays unchanged.
 
