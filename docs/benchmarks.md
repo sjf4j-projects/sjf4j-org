@@ -1,4 +1,4 @@
-# Benchmark
+# Benchmarks
 
 All benchmarks are reproducible and implemented using **JMH (Java Microbenchmark Harness)**.
 
@@ -22,9 +22,9 @@ ReadBenchmark.json_fastjson2_native_no_any   avgt    5  0.220 ± 0.011  us/op
 ReadBenchmark.json_simple_facade             avgt    5  2.756 ± 0.116  us/op
 ```
 
-::: tip Performance Summary
-Using SJF4J adds roughly **5%–10% overhead** compared with native JSON libraries, while providing a unified API and extended functionality.
-:::
+**Performance Summary**  
+Using SJF4J adds roughly **5%–10% overhead** compared with native JSON libraries, 
+while providing a unified API and extended functionality.
 
 ## Reflection Benchmark
 
@@ -43,6 +43,20 @@ ReflectionBenchmark.reflection_setter_methodHandler  avgt    5  0.009 ±  0.001 
 ReflectionBenchmark.reflection_setter_native         avgt    5  0.007 ±  0.001  us/op
 ```
 
-::: tip Performance Summary
-Reflection in SJF4J, when using **lambda-based** access, is highly efficient, enabling dynamic object manipulation with **near-native performance**.
-:::
+**Performance Summary**  
+Reflection in SJF4J, when using **lambda-based** access, is highly efficient, 
+enabling dynamic object manipulation with **near-native performance**.
+
+## JSON Schema Validation Benchmark
+
+According to the official JSON Schema [Bowtie](https://bowtie.report/) benchmark, 
+performance can be evaluated locally using:
+```shell
+bowtie perf -i java-sjf4j -i java-json-schema -i java-networknt-json-schema-validator -D draft2020-12
+```
+
+**Performance Summary**  
+In Bowtie’s draft 2020-12 benchmark, 
+SJF4J consistently ranks at the top tier of Java implementations in terms of throughput.
+
+

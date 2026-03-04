@@ -1,8 +1,8 @@
-# Model
-
-## Object Based Node Tree
+# Modeling (OBNT)
 
 SJF4J represents structured data as an **Object Based Node Tree (OBNT)**.
+
+## Object Based Node Tree
 
 Instead of introducing a dedicated AST hierarchy (e.g. `JsonNode`, `JsonElement`),
 OBNT uses **plain Java objects as nodes**. Any node in the tree is one of:
@@ -32,19 +32,6 @@ graph BT
     value ---> nodeValue("&lt;NodeValue&gt;")
 ```
 
-### Why OBNT
-
-**1) One set of JSON-semantic APIs for every node**  
-SJF4J treats every node as a first-class citizen. Traversal, query, patch, and validation can be applied uniformly,
-regardless of whether a node is a raw `Map/List`, a `JsonObject/JsonArray`, or a typed domain model.
-
-**2) Focus on business**  
-Model your domain in the most natural way for your business. All nodes are plain Java objects—they can be stored, 
-logged, passed through frameworks, and inspected with standard tools.   
-No custom AST or special infrastructure is required. 
-SJF4J ensures that any node can be represented as JSON when needed.
-
-
 ### Node Types
 
 **JSON Object `{}`**
@@ -54,14 +41,14 @@ SJF4J ensures that any node can be represented as JSON when needed.
 - `JsonObject`:   
   A lightweight wrapper over a JSON object that provides JSON-semantic APIs,
 
-- `POJO` (Plain Old Java Object):  
-  A strongly typed Java object with fields, getters, and setters.
-  Great for stable schemas and business logic.
-
 - `JOJO` (JSON Object Java Object):  
   A hybrid model that extends `JsonObject` while behaving like a typed Java object. It combines:
-  - **static fields** (POJO-style, strongly typed), and
+  - **declared fields** (POJO-style, strongly typed), and
   - **dynamic properties** (JSON-style, preserved as-is)
+
+- `POJO` (Plain Old Java Object):  
+  A strongly typed Java object with fields, getters, and setters. 
+  Great for stable schemas and business logic.
 
 **JSON Array `[]`**
 - `List`   
@@ -71,7 +58,7 @@ SJF4J ensures that any node can be represented as JSON when needed.
   A lightweight wrapper over a JSON array that provides JSON-semantic APIs.
 
 - `JAJO`(JSON Array Java Object)  
-  An array type extending `JsonArray`, suitable for domain-specific array models (e.g. `JsonPatch`).
+  An array type extending `JsonArray`, suitable for domain-specific array models.
 
 - `Array`  
   A native Java array (e.g. `String[]`) used when a fixed-size, strongly typed representation is desired.
@@ -85,9 +72,10 @@ SJF4J ensures that any node can be represented as JSON when needed.
 
 - `NodeValue`  
   A typed value representation that preserves JSON semantics while enabling
-  custom Java type adaptation (e.g. `LocalDate`, `UUID`).
+  custom Java type adaptation.   
+  (e.g. `LocalDate`, `UUID`)
 
-**Node Type Identification**
+### Type Identification
 
 OBNT distinguishes between **JSON types** and **node kinds**.
 
@@ -102,7 +90,7 @@ OBNT distinguishes between **JSON types** and **node kinds**.
 | `NUMBER`  | `VALUE_NUMBER`                                                                 |
 | `BOOLEAN` | `VALUE_BOOLEAN`                                                                |
 | `NULL`    | `VALUE_NULL`                                                                   |
-| --        | `VALUE_NODE_VALUE`                                                             |
+| `*`       | `VALUE_NODE_VALUE`                                                             |
 
 ```java
 Object node = new HashMap<String, Object>();
@@ -113,30 +101,45 @@ NodeKind kind = NodeKind.of(node);      // NodeKind.OBJECT_MAP
 
 **The Raw Nodes**  
 When no target type is specified during parsing or transforming,
-each JSON type is mapped to its default raw node type.
-- `Map` for JSON objects
-- `List` for JSON arrays
+each JSON type is mapped to its default raw node type:
+- `Map<String, Object>` for JSON objects
+- `List<Object>` for JSON arrays
 - `String`, `Number`, `Boolean`, or `null` for JSON values
 
+### Why OBNT
+
+**1) One set of JSON-semantic APIs for every node**  
+SJF4J treats every node as a first-class citizen.  
+Traversal, query, patch, and validation can be applied uniformly,
+regardless of whether a node is a raw `Map/List`, a `JsonObject/JsonArray`, or a typed domain model.
+
+**2) Focus on business**  
+Model your domain in the most natural way for your business.  
+All nodes are plain Java objects—they can be stored,
+logged, passed through frameworks, and inspected with standard tools.   
+No custom AST or special infrastructure is required.
 
 
 ## Node Semantics
-All nodes in OBNT share a unified set of JSON-semantic operations.  
-They are available through:
+All nodes in OBNT share a unified set of JSON-semantic APIs.  
+Basic operations are available through:
 - Instance methods (`JsonObject`, `JsonArray`)
 - The static `Nodes` facade (for raw nodes)
 
 ### Access and Conversion
 Nodes support both strict access and semantic conversion.
 
-- `toXxx()` performs **type-safe access** (e.g. `Integer → Long`, `Double → Float`)
-- `asXxx()` performs **cross-type conversion** (e.g. `String → Number`, `Boolean → String`)
+- `toXxx()` performs **type-safe access**  
+  (e.g. `Integer → Long`, `Double → Float`)
+- `asXxx()` performs **cross-type conversion**  
+  (e.g. `String → Number`, `Boolean → String`)
 
 ```java
 Object node = "123";
 
-Nodes.toString(node);           // -> "123"      
-Nodes.asInteger(node);          // -> 123
+Nodes.toString(node);           // -> "123"
+Nodes.toInteger(node);          // -> ERROR (strict access)
+Nodes.asInteger(node);          // -> 123   (semantic conversion)
 ```
 
 ### Structural Operations
@@ -147,49 +150,106 @@ Nodes.containsInObject(node, "name");
 Nodes.getInObject(node, "name");
 Nodes.visitObject(node, (k, v) -> {...});
 ```
+Equivalent APIs exist for arrays.
 
-And the same is arrays.
+### Traversal
+Nodes can be traversed recursively with path awareness:
 
-### Semantic equality, inspection and copying
-Equality is defined by JSON structure and value, not by Java object identity.
+```java
+Nodes.walk(node, (ps, value) -> {
+    log.info("path={}, segment={}, value={}", ps.rootedPathExpr(), ps, value);
+    return true;
+});
+```
+
+### Equality, Inspection and Copying
+**Equality** is defined by JSON structure and value, not by Java object identity.
 ```java
 Nodes.equals(node1, node2);
 ```
-
-Inspection output includes OBNT-specific details
-beyond standard JSON serialization, making it suitable for debugging `JOJO` models.
+**Inspection** produces a readable OBNT representation,
+including additional runtime details (e.g. declared vs dynamic fields in JOJO).
 ```java
 System.out.println(Nodes.inspect(node));
 ```
 
-Copy semantics are explicit and predictable.
+**Copying** semantics are explicit.
 ```java
 Nodes.copy(node);               // shallow copy
 Sjf4j.deepNode(node);           // deep copy
 ```
 
-### Traversal
-Nodes can be traversed recursively with full path awareness:
+### Use dynamic `JsonObject` 
+`Nodes` provides static APIs for all OBNT nodes.  
+`JsonObject` offers a dynamic, instance-based representation for JSON objects.
 
 ```java
-Nodes.walk(node, (ps, value) -> {
-        System.out.println(ps. + " = " + value);
-});
+String json = """
+{
+    "id": 1,
+    "name": "Alice",
+    "active": true,
+    "tags": ["java", "json"],
+    "scores": [95, 88.8, 0.5],
+    "user": { "role": "coder" }
+}
+""";
+
+JsonObject jo = JsonObject.fromJson(json);
+// Parse JSON string to JsonObject
 ```
 
-### 最常用的 `JsonObject` 
+Accessing properties:
+```java
+Object node = jo.getNode("id");
+// Returns raw node, or null if missing.
 
+Integer id = jo.getInteger("id");
+// Strict numeric access.
 
+double id2 = jo.getDouble("id", 0d);
+// Returns default if missing or null.
+
+String name = jo.get("name", String.class);
+// Explicit typed access.
+
+String name1 = jo.get("name");
+// Context-inferred typed access.
+
+String active = jo.getAsString("active");
+// Cross-type conversion.
+
+String active2 = jo.getAs("active");
+// Dynamic conversion shorthand.
+```
+
+Nested operations can be chained naturally:
+```java
+String role = jo.getJsonObject("user").get("role");
+```
+
+Mutating structure:
+```java
+jo.put("extra", "blabla");
+// See also: putNonNull(), putIfAbsent(), computeIfAbsent()
+
+jo.toBuilder().putIfAbsent("x", "xx").put("y", "yy");
+// Builder-style chained updates
+
+jo.remove("extra");
+// See also: removeIf()
+```
+> `JsonArray` is the array counterpart of `JsonObject`, providing a similar set of APIs for array nodes.
 
 ## Modeling Domain Objects with JOJO
+> JSON is flexible, while POJOs are strict.
 
-JSON is flexible, while POJOs are strict.  
 Mapping JSON directly into a POJO often means discarding undeclared fields,
-which may reduce the expressive power of the original JSON payload.
+which may reduce the expressive power of the original JSON payload.  
 
-[Jackson](https://github.com/FasterXML/jackson-databind) offers one workaround: 
-store extra fields in a dedicated map (e.g. via `@JsonAnySetter`).  
-SJF4J takes a different approach: `JOJO`.
+[Jackson](https://github.com/FasterXML/jackson-databind) provides a mechanism to retain extra fields
+through a dedicated map (via `@JsonAnySetter`).  
+SJF4J approaches this at the modeling level with `JOJO`.
 
 A `JOJO` is simply a class that extends `JsonObject`:
 ```java
@@ -234,10 +294,12 @@ System.out.println(user);
 //                            ↓                                                ↓
 //              Declared fields in POJO/JOJO                      Dynamic properties in JOJO
 ```
-- Fields marked with * are declared fields.
+- Fields marked with `*` are declared fields.
 - Other entries are dynamic properties retained from JSON.
 
-**Use JSON-semantic APIs**
+**Use JSON-semantic APIs**  
+
+For example: `findByPath()`
 ```java
 List<String> allFriends = user.findByPath("$.friends..name", String.class);
 // ["Bill", "Cindy", "David"] -- all friends and friends of friends.

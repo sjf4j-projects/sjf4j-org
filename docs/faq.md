@@ -21,7 +21,7 @@ Yes. Besides JSON, SJF4J supports:
 
 ## What is the performance overhead?
 
-Using SJF4J adds roughly **5–10% overhead** compared with native JSON libraries, while providing a unified API and extended functionality. See the [Benchmark](/docs/benchmark) page for detailed JMH results.
+Using SJF4J adds roughly **5–10% overhead** compared with native JSON libraries, while providing a unified API and extended functionality. See the [Benchmark](/docs/benchmarks) page for detailed JMH results.
 
 ## What is JOJO?
 

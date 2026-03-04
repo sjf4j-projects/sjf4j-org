@@ -1,8 +1,6 @@
-# Codec
+# Parsing (Codec)
 
-The **Codec** module bridges structured data and the [OBNT](model#abc).
-
-It provides a unified set of entry-point APIs through `Sjf4j`,
+`Sjf4j` provides a unified set of entry-point APIs,
 allowing data to move consistently between:
 
 - JSON / YAML / Properties
@@ -12,7 +10,7 @@ allowing data to move consistently between:
 
 ## Conversion APIs
 
-#### `fromJson()` / `toJson()`
+### `fromJson()` / `toJson()`
 From JSON
 ```java
 Object node = Sjf4j.fromJson(json);
@@ -38,7 +36,7 @@ Sjf4j.toJson(out, node);
 ```
 
 
-#### `fromYaml()` / `toYaml()`
+### `fromYaml()` / `toYaml()`
 Semantically identical to JSON conversion.
 ```java
 Object node = Sjf4j.fromYaml(yaml);
@@ -46,7 +44,7 @@ Object node = Sjf4j.fromYaml(yaml);
 String yaml2 = Sjf4j.toYamlString(node);
 ```
 
-#### `fromProperties()` / `toProperties()`
+### `fromProperties()` / `toProperties()`
 Converts between hierarchical data and flat property structures.
 ```java
 Object node = Sjf4j.fromProperties(properties);
@@ -55,7 +53,7 @@ Properties properties2 = Sjf4j.toProperties(node);
 // {"aa":{"bb":[{"cc":"dd"}]}} → aa.bb[0].cc=dd
 ```
 
-#### `fromNode()`, `deepNode()`
+### `fromNode()` / `deepNode()`
 - `fromNode()` converts one OBNT representation into another.
 - `deepNode()` performs a full deep copy.
 ```java
@@ -73,7 +71,7 @@ SJF4J allows custom Java types to participate in OBNT.
 - For JSON Array → use `JAJO`
 - For JSON Value → use `NodeValue`
 
-#### Using `NodeValue`
+### Using `NodeValue`
 **Annotate with `@NodeValue`**
 ```java
 @NodeValue    
@@ -133,7 +131,7 @@ NodeRegistry.registerValueCodec(new ValueCodec<LocalDate, String>() {
 });
 ```
 
-#### Using `@OneOf`
+### Using `@OneOf`
 
 `@OneOf` enables multi-type binding at the schema level,
 allowing structured data to map to multiple candidate types.

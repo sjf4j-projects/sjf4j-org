@@ -19,7 +19,7 @@ function normalizePath(relativePath: string): string {
 export default withMermaid(defineConfig({
   title: 'SJF4J',
   description: 'Simple JSON Facade for Java — A Unified JSON Semantic Layer',
-  ignoreDeadLinks: true,
+  ignoreDeadLinks: false,
   srcExclude: ['README.md'],
 
   head: [
@@ -89,7 +89,7 @@ export default withMermaid(defineConfig({
 
     nav: [
       { text: 'Home', link: '/' },
-      { text: 'Docs', link: '/docs/obnt-and-jojo' },
+      { text: 'Docs', link: '/docs/getting_started' },
       { text: 'GitHub', link: 'https://github.com/sjf4j-projects/sjf4j' },
     ],
 
@@ -97,14 +97,25 @@ export default withMermaid(defineConfig({
       {
         text: 'Guide',
         items: [
-          { text: 'OBNT & JOJO', link: '/docs/obnt-and-jojo' },
-          { text: 'Basic Operations', link: '/docs/basic-operations' },
-          { text: 'JsonPath & JsonPointer', link: '/docs/jsonpath' },
-          { text: 'JsonPatch', link: '/docs/jsonpatch' },
-          { text: 'JsonSchema', link: '/docs/jsonschema' },
-          { text: 'Benchmark', link: '/docs/benchmark' },
-          { text: '────────' },
-          { text: 'FAQ', link: '/docs/faq' },
+          { text: 'Getting Started', link: '/docs/getting_started' },
+          { text: 'Benchmarks', link: '/docs/benchmarks' },
+        ],
+      },
+      {
+        text: 'Features',
+        items: [
+          { text: 'Modeling - OBNT', link: '/docs/modeling' },
+          { text: 'Parsing - Codec', link: '/docs/parsing' },
+          { text: 'Navigating - JSON Path', link: '/docs/navigating' },
+          { text: 'Transforming - JSON Patch', link: '/docs/transforming' },
+          { text: 'Validating - JSON Schema', link: '/docs/validating' }
+        ],
+      },
+      {
+        text: 'Reference',
+        items: [
+          { text: 'Javadocs', link: 'https://javadoc.io/doc/org.sjf4j/sjf4j' },
+          { text: 'Bowtie', link: 'https://bowtie.report/#/implementations/java-sjf4j' }
         ],
       },
     ],
@@ -112,6 +123,10 @@ export default withMermaid(defineConfig({
     socialLinks: [
       { icon: 'github', link: 'https://github.com/sjf4j-projects/sjf4j' },
     ],
+
+    outline: {
+      level: [2, 3],
+    },
 
     footer: {
       message: 'Released under the <a href="https://opensource.org/licenses/MIT" target="_blank" rel="noreferrer">MIT License</a>. JSON Specs: <a href="https://www.rfc-editor.org/rfc/rfc8259" target="_blank" rel="noreferrer">RFC 8259</a> | <a href="https://www.rfc-editor.org/rfc/rfc6901" target="_blank" rel="noreferrer">RFC 6901</a> | <a href="https://www.rfc-editor.org/rfc/rfc6902" target="_blank" rel="noreferrer">RFC 6902</a> | <a href="https://www.rfc-editor.org/rfc/rfc7386" target="_blank" rel="noreferrer">RFC 7386</a> | <a href="https://www.rfc-editor.org/rfc/rfc9535" target="_blank" rel="noreferrer">RFC 9535</a> | <a href="https://json-schema.org" target="_blank" rel="noreferrer">JSON Schema</a>',
