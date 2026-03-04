@@ -42,7 +42,7 @@ graph BT
   A lightweight wrapper over a JSON object that provides JSON-semantic APIs,
 
 - `JOJO` (JSON Object Java Object):  
-  A hybrid model that extends `JsonObject` while behaving like a typed Java object. It combines:
+  A hybrid model that extends `JsonObject` while behaving as a typed Java object. It combines:
   - **declared fields** (POJO-style, strongly typed), and
   - **dynamic properties** (JSON-style, preserved as-is)
 
