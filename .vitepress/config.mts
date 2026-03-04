@@ -102,13 +102,13 @@ export default withMermaid(defineConfig({
         ],
       },
       {
-        text: 'Features',
+        text: 'Modules',
         items: [
-          { text: 'Modeling - OBNT', link: '/docs/modeling' },
-          { text: 'Parsing - Codec', link: '/docs/parsing' },
-          { text: 'Navigating - JSON Path', link: '/docs/navigating' },
-          { text: 'Transforming - JSON Patch', link: '/docs/transforming' },
-          { text: 'Validating - JSON Schema', link: '/docs/validating' }
+          { text: 'Modeling (OBNT)', link: '/docs/modeling' },
+          { text: 'Parsing (Codec)', link: '/docs/parsing' },
+          { text: 'Navigation (JSON Path)', link: '/docs/navigation' },
+          { text: 'Transformation (JSON Patch)', link: '/docs/transformation' },
+          { text: 'Validation (JSON Schema)', link: '/docs/validation' }
         ],
       },
       {

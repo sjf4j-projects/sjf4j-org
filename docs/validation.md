@@ -81,7 +81,7 @@ if (!result.isValid()) {
 
 ### Schema References
 
-Using reference via `ref`
+Using references via `ref`
 ```java
 @ValidJsonSchema(ref = "domain.schema.json#User")            // $anchor
 public class UserDto { ... }
@@ -158,5 +158,4 @@ Since validation operates directly on OBNT:
 
 Validation is therefore a structural capability of OBNT,
 not a separate JSON-processing pipeline.
-
 
