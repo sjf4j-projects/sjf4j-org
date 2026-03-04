@@ -68,17 +68,21 @@ SJF4J requires `JDK 8` and has no external dependencies.
   margin-top: 0.9rem;
 }
 
-.feature-card {
+.vp-doc .feature-card {
   display: flex;
   flex-direction: column;
   border: 1px solid var(--vp-c-divider);
   border-radius: 12px;
   background: var(--vp-c-bg-soft);
-  padding: 1rem 1.1rem;
+  padding: 0.9rem 1.05rem;
 }
 
-.feature-card h3 {
-  margin: 0 0 0.45rem;
+.vp-doc .feature-card > :first-child {
+  margin-top: 0 !important;
+}
+
+.vp-doc .feature-card h3 {
+  margin: 0 0 0.45rem !important;
   font-size: 1rem;
   line-height: 1.35;
 }
