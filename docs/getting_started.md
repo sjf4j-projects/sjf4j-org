@@ -4,22 +4,19 @@
 ![Supported Dialects](https://img.shields.io/endpoint?url=https%3A%2F%2Fbowtie.report%2Fbadges%2Fjava-org.sjf4j-sjf4j%2Fsupported_versions.json)
 ![Maven Central](https://img.shields.io/maven-central/v/org.sjf4j/sjf4j)
 [![javadoc](https://javadoc.io/badge2/org.sjf4j/sjf4j/javadoc.svg)](https://javadoc.io/doc/org.sjf4j/sjf4j)
-![Stars](https://img.shields.io/github/stars/sjf4j-projects/sjf4j?style=social)
+![Stars](https://img.shields.io/github/stars/sjf4j-projects/sjf4j?style=social)  
 ![Build](https://img.shields.io/github/actions/workflow/status/sjf4j-projects/sjf4j/gradle.yml?branch=main)
 
+**SJF4J** is a lightweight facade over multiple JSON libraries, 
+including [Jackson 2.x](https://github.com/FasterXML/jackson-databind), 
+[Gson](https://github.com/google/gson), 
+[Fastjson2](https://github.com/alibaba/fastjson2).  
+Beyond JSON, it also supports for YAML (via [SnakeYAML](https://github.com/snakeyaml/snakeyaml))
+and Java Properties (built-in).
 
-**SJF4J** is a lightweight facade over multiple JSON libraries, including: 
-- [Jackson 2.x](https://github.com/FasterXML/jackson-databind)
-- [Gson](https://github.com/google/gson)
-- [Fastjson2](https://github.com/alibaba/fastjson2)
-
-Beyond JSON, SJF4J also supports:
-- YAML (via [SnakeYAML](https://github.com/snakeyaml/snakeyaml))
-- Java Properties (built-in)
-
-It provides **a unified JSON-semantic structural processing layer**,
-with consistent and expressive APIs for working with structured data or in-memory objects.
-
+SJF4J provides **a unified JSON-semantic structural processing layer**,
+delivering consistent and expressive APIs for parsing, navigation, transformation, 
+and validation across formats and native object graphs.
 ## Install
 SJF4J requires `JDK 8+` and has no external dependencies.
 
@@ -37,40 +34,42 @@ Maven
 ```
 
 **Optional Runtime Backends**  
-SJF4J itself has no external dependencies.  
-Support for specific data formats is enabled by adding the corresponding libraries at runtime.
+SJF4J itself has no external runtime dependencies.  
+Format support is activated only when the corresponding libraries are present.
 
 - **JSON** — Include one of: `Jackson 2.x`, `Gson`, or `Fastjson2`.  
-SJF4J automatically detects and uses the first available implementation in that order.
-If none are detected, it falls back to a built-in minimal JSON parser (functional but slower).
+  SJF4J automatically detects and uses the first available implementation in that order.
+  If none are detected, it falls back to a built-in minimal JSON parser (functional but slower).
 
 
 - **YAML** — Include `SnakeYAML`.
 
 
 - **Java Properties** — A built-in parser is provided.  
-Conversions from Java Properties are inherently constrained by its flat key-value structure.
+  Conversions from Java Properties are inherently constrained by its flat key-value structure.
 
 
 - **In-Memory Usage** (No External Data) — SJF4J does not require external parsing.  
-It can operate directly on in-memory object graphs through OBNT,
-providing the same JSON-semantic APIs for navigation, transformation, and validation.
+  It can operate directly on in-memory object graphs through OBNT,
+  providing the same JSON-semantic APIs for navigation, transformation, and validation.
 
 ## Quickstart
 
-In SJF4J:
-- All structured data are mapped into an **Object-Based Node Tree (OBNT)**.
+SJF4J is built around a single structural model: the **Object-Based Node Tree (OBNT)**.
+- All structured data are mapped into OBNT.
 - All nodes in OBNT are represented as native Java objects -- no dedicated AST.
 - All APIs operate directly on native Java objects.
 - All APIs follow -- and extend -- standard JSON semantics.
 
-The following example demonstrates a complete lifecycle:  
-> **Model → Parse → Navigate → Patch → Validate**
-
+The following example, while slightly more elaborate, 
+demonstrates the complete lifecycle:
+> **Modeling → Parsing → Navigation → Transformation → Validation**
 
 ### Modeling with JOJO
 
-JOJO enables structured data modeling without forcing a choice between static typing and dynamic flexibility.
+JOJO (JSON Object Java Object) eliminates the traditional trade-off 
+between typed Java models and dynamic JSON structures.
+
 > JOJO extends `JsonObject`, unifying typed Java fields and dynamic JSON properties within a single object model.
 
 ```java
@@ -83,7 +82,7 @@ public class Student extends JsonObject {
 ```
 Learn more → [Modeling (OBNT)](https://sjf4j.org/docs/modeling)
 
-### Parsing JSON into OBNT
+### Parsing from JSON
 
 `Sjf4j` is the unified facade for structured data encoding and decoding across multiple formats.
 ```java
@@ -114,7 +113,7 @@ student.getInteger("age");          // 18
 Learn more → [Parsing (Codec)](https://sjf4j.org/docs/parsing)
 
 ### Navigating with JSON Path
-OBNT enables declarative structural navigation, expressive querying, 
+OBNT enables declarative structural navigation, expressive querying,
 and precise mutation through `JSON Path` or `JSON Pointer`.
 ```java
 student.getIntegerByPath("$.scores.math");
@@ -153,7 +152,7 @@ Learn more → [Transformation (JSON Patch)](https://sjf4j.org/docs/transformati
 
 ### Validating with JSON Schema
 
-Declare JSON Schema constraints with `@ValidJsonSchema` (Jakarta Bean Validation–style). 
+Declare JSON Schema constraints with `@ValidJsonSchema` (Jakarta Bean Validation–style).
 ```java
 @ValidJsonSchema("""
 {
@@ -197,25 +196,28 @@ validator.validate(student).isValid();                  // true
 Learn more → [Validation (JSON Schema)](https://sjf4j.org/docs/validation)
 
 ## Benchmarks
+SJF4J is designed to minimize structural overhead while preserving unified semantics.
 
 **JSON Parsing Performance**  
 Using SJF4J introduces approximately 5–10% overhead compared to native JSON libraries,
 while providing a unified API, structural abstraction, and extended functionality.
 
-**JSON Schema Validation Performance**  
-SJF4J fully supports JSON Schema draft 2020-12 and 
-consistently ranks among the top-performing Java implementations in [Bowtie](https://bowtie.report/#/implementations/java-sjf4j) benchmarks.
-
-
 **Reflection Access Performance**  
 Lambda-based accessor generation minimizes reflection overhead,
-delivering near-native performance to direct field or method invocation.
+delivering performance close to direct field or method invocation.
+
+**JSON Schema Validation Performance**  
+SJF4J fully supports JSON Schema draft 2020-12 and
+consistently ranks among the top-performing Java implementations in [Bowtie](https://bowtie.report/#/implementations/java-sjf4j) benchmarks.
 
 Learn more → [Benchmarks](https://sjf4j.org/docs/benchmarks)
 
-## Contributing 
-  
-Contributions of all kinds, whether it’s code, documentation, discuss, examples, benchmarking, 
-or simply filing an issue, are truly appreciated! 
+## Contributing
+Given that JSON has evolved into a well-defined and widely adopted specification,
+SJF4J began as an exploration of what JSON-oriented development might look like in Java.
+
+If this idea resonates with you, 
+contributions of all kinds — codes, docs, bugs, discussions, examples, or benchmarks — are welcome~!
+
 
 
