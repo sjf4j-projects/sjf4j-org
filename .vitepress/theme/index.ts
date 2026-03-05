@@ -58,7 +58,7 @@ const theme: Theme = {
           h(
             'a',
             {
-              href: 'https://github.com/sjf4j-projects/sjf4j/stargazers',
+              href: 'https://github.com/sjf4j-projects/sjf4j/actions/workflows/gradle.yml?query=branch%3Amain',
               target: '_blank',
               rel: 'noreferrer',
             },
@@ -72,7 +72,7 @@ const theme: Theme = {
           h(
             'a',
             {
-              href: 'https://bowtie.report/#/implementations/java-sjf4j',
+              href: 'https://github.com/sjf4j-projects/sjf4j/stargazers',
               target: '_blank',
               rel: 'noreferrer',
             },

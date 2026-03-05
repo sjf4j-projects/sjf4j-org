@@ -2,6 +2,7 @@ import { defineConfig } from 'vitepress'
 import { withMermaid } from 'vitepress-plugin-mermaid'
 
 const SITE_URL = 'https://sjf4j.org'
+const OG_IMAGE_URL = `${SITE_URL}/logo-512.png`
 
 function normalizePath(relativePath: string): string {
   if (relativePath === 'index.md') {
@@ -23,7 +24,10 @@ export default withMermaid(defineConfig({
   srcExclude: ['README.md'],
 
   head: [
-    ['link', { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }],
+    ['link', { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon-32.png?v=3' }],
+    ['link', { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg?v=3' }],
+    ['link', { rel: 'apple-touch-icon', sizes: '192x192', href: '/favicon-192.png?v=3' }],
+    ['link', { rel: 'shortcut icon', href: '/favicon-32.png?v=3' }],
     ['script', { async: '', src: 'https://www.googletagmanager.com/gtag/js?id=G-KBSJRCWQ4V' }],
     ['script', {}, `
       window.dataLayer = window.dataLayer || [];
@@ -36,9 +40,12 @@ export default withMermaid(defineConfig({
     ['meta', { property: 'og:title', content: 'SJF4J — Simple JSON Facade for Java' }],
     ['meta', { property: 'og:description', content: 'Enjoying JSON-oriented Java development. A simple facade over multiple JSON libraries with a unified semantic layer.' }],
     ['meta', { property: 'og:type', content: 'website' }],
+    ['meta', { property: 'og:image', content: OG_IMAGE_URL }],
+    ['meta', { property: 'og:site_name', content: 'SJF4J' }],
     ['meta', { name: 'twitter:card', content: 'summary' }],
     ['meta', { name: 'twitter:title', content: 'SJF4J — Simple JSON Facade for Java' }],
     ['meta', { name: 'twitter:description', content: 'Enjoying JSON-oriented Java development. A simple facade over multiple JSON libraries with a unified semantic layer.' }],
+    ['meta', { name: 'twitter:image', content: OG_IMAGE_URL }],
     ['script', { type: 'application/ld+json' }, JSON.stringify({
       '@context': 'https://schema.org',
       '@type': 'SoftwareApplication',
@@ -66,8 +73,10 @@ export default withMermaid(defineConfig({
       ['meta', { property: 'og:url', content: canonical }],
       ['meta', { property: 'og:title', content: title }],
       ['meta', { property: 'og:description', content: description }],
+      ['meta', { property: 'og:image', content: OG_IMAGE_URL }],
       ['meta', { name: 'twitter:title', content: title }],
       ['meta', { name: 'twitter:description', content: description }],
+      ['meta', { name: 'twitter:image', content: OG_IMAGE_URL }],
       ['script', { type: 'application/ld+json' }, JSON.stringify({
         '@context': 'https://schema.org',
         '@type': ldType,

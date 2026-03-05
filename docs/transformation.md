@@ -124,7 +124,7 @@ PatchOpRegistry.register("add", (target, op) -> {           // The Standard 'add
 
 ## Merging under JSON Merge Patch (RFC 7386)
 
-Unlike JSON Patch, [JSON Merge Patch (RFC 7386)](https://datatracker.ietf.org/doc/html/rfc7386):
+Unlike JSON Patch (RFC 6902), [JSON Merge Patch (RFC 7386)](https://datatracker.ietf.org/doc/html/rfc7386):
 - Is object-based
 - Does not use paths
 - Is not operation-based

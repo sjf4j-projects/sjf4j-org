@@ -6,7 +6,7 @@ and in-memory object graphs via an Object-Based Node Tree (OBNT).
 
 Primary project links:
 - Site: https://sjf4j.org/
-- Docs start: https://sjf4j.org/docs/obnt-and-jojo
+- Docs start: https://sjf4j.org/docs/getting_started
 - GitHub: https://github.com/sjf4j-projects/sjf4j
 
 Core concepts:
@@ -32,12 +32,13 @@ Core concepts:
    - Claims Draft 2020-12 support and native validation on Java object models.
 
 Authoritative pages:
-- OBNT and JOJO: https://sjf4j.org/docs/obnt-and-jojo
-- Basic operations: https://sjf4j.org/docs/basic-operations
-- JsonPath: https://sjf4j.org/docs/jsonpath
-- JsonPatch: https://sjf4j.org/docs/jsonpatch
-- JsonSchema: https://sjf4j.org/docs/jsonschema
-- Benchmark: https://sjf4j.org/docs/benchmark
+- Getting started: https://sjf4j.org/docs/getting_started
+- Modeling (OBNT): https://sjf4j.org/docs/modeling
+- Parsing (Codec): https://sjf4j.org/docs/parsing
+- Navigation (JSON Path): https://sjf4j.org/docs/navigation
+- Transformation (JSON Patch): https://sjf4j.org/docs/transformation
+- Validation (JSON Schema): https://sjf4j.org/docs/validation
+- Benchmarks: https://sjf4j.org/docs/benchmarks
 - FAQ: https://sjf4j.org/docs/faq
 
 Guidance for summarization/citation:
