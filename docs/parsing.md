@@ -131,9 +131,84 @@ NodeRegistry.registerValueCodec(new ValueCodec<LocalDate, String>() {
 });
 ```
 
-### Using `@OneOf`
+### Using `@AnyOf`
 
-`@OneOf` enables multi-type binding at the schema level,
-allowing structured data to map to multiple candidate types.
+`@AnyOf` enables polymorphic binding by mapping one logical type to multiple concrete types.
 
-> Note: `@OneOf` is planned but not yet implemented :)
+It supports three practical patterns:
+
+1. Discriminator on the same object (`scope = SELF`, default)
+2. Discriminator from parent object (`scope = PARENT`)
+3. Fallback by JSON runtime shape (object/array), when no discriminator is provided
+
+#### 1) Discriminator on current object
+
+```java
+@AnyOf(key = "kind", value = {
+    @AnyOf.Mapping(value = Cat.class, when = "cat"),
+    @AnyOf.Mapping(value = Dog.class, when = "dog")
+})
+class Animal {
+    String kind;
+    String name;
+}
+
+class Cat extends Animal { int lives; }
+class Dog extends Animal { int bark; }
+
+Animal a = Sjf4j.fromJson(
+    "{\"kind\":\"dog\",\"name\":\"Lucky\",\"bark\":3}",
+    Animal.class
+);
+// a is Dog
+```
+
+#### 2) Discriminator from parent object
+
+```java
+class ParentZoo {
+    String kind;
+
+    @AnyOf(
+        key = "kind",
+        scope = AnyOf.Scope.PARENT,
+        value = {
+            @AnyOf.Mapping(value = Cat.class, when = "cat"),
+            @AnyOf.Mapping(value = Dog.class, when = "dog")
+        }
+    )
+    Animal pet;
+}
+
+ParentZoo z = Sjf4j.fromJson(
+    "{\"kind\":\"cat\",\"pet\":{\"name\":\"Mimi\",\"lives\":9}}",
+    ParentZoo.class
+);
+// z.pet is Cat
+```
+
+> `path`-based parent discriminator resolution is currently not supported in streaming mode.
+
+#### 3) No discriminator: bind by JSON shape
+
+```java
+@AnyOf(value = {
+    @AnyOf.Mapping(PolyObj.class),
+    @AnyOf.Mapping(PolyArr.class)
+})
+interface Poly {}
+
+class PolyObj extends JsonObject implements Poly {}
+class PolyArr extends JsonArray implements Poly {}
+
+Poly p1 = Sjf4j.fromJson("{\"a\":1}", Poly.class); // PolyObj
+Poly p2 = Sjf4j.fromJson("[1,2,3]", Poly.class);     // PolyArr
+```
+
+#### Matching behavior
+
+- `key`: discriminator field name
+- `path`: discriminator JSONPath expression (supported in `Scope.SELF`), evaluated only when `key` is not provided
+- `when`: accepted discriminator values for one mapping; runtime discriminator values are matched after string conversion
+- `scope`: where to resolve discriminator (`SELF` or `PARENT`)
+- `onNoMatch`: behavior when no mapping matches (`FAIL` by default, or `FAILBACK_NULL`)
