@@ -10,7 +10,8 @@
 **SJF4J** is a lightweight facade over multiple JSON libraries, 
 including [Jackson 2.x](https://github.com/FasterXML/jackson-databind), 
 [Gson](https://github.com/google/gson), 
-[Fastjson2](https://github.com/alibaba/fastjson2).  
+[Fastjson2](https://github.com/alibaba/fastjson2),
+[JSON-P](https://github.com/jakartaee/jsonp-api).  
 Beyond JSON, it also supports for YAML (via [SnakeYAML](https://github.com/snakeyaml/snakeyaml))
 and Java Properties (built-in).
 
@@ -37,17 +38,15 @@ Maven
 SJF4J itself has no external runtime dependencies.  
 Format support is activated only when the corresponding libraries are present.
 
-- **JSON** — Include one of: `Jackson 2.x`, `Gson`, or `Fastjson2`.  
+- **JSON** — Include one of: `Jackson 2.x`, `Gson`, `Fastjson2`, or `JSON-P` (with `Parsson` or other).  
   SJF4J automatically detects and uses the first available implementation in that order.
   If none are detected, it falls back to a built-in minimal JSON parser (functional but slower).
 
 
 - **YAML** — Include `SnakeYAML`.
 
-
 - **Java Properties** — A built-in parser is provided.  
   Conversions from Java Properties are inherently constrained by its flat key-value structure.
-
 
 - **In-Memory Usage** (No External Data) — SJF4J does not require external parsing.  
   It can operate directly on in-memory object graphs through OBNT,
@@ -56,35 +55,35 @@ Format support is activated only when the corresponding libraries are present.
 ## Quickstart
 
 SJF4J is built around a single structural model: the **Object-Based Node Tree (OBNT)**.
-- All structured data are mapped into OBNT.
+- All structured data in SJF4J are mapped into OBNT.
 - All nodes in OBNT are represented as native Java objects -- no dedicated AST.
 - All APIs operate directly on native Java objects.
-- All APIs follow -- and extend -- standard JSON semantics.
+- All APIs follow -- or extend -- standard JSON semantics.
 
 The following example, while slightly more elaborate, 
-demonstrates the complete lifecycle:
+demonstrates the whole lifecycle:
 > **Modeling → Parsing → Navigation → Transformation → Validation**
 
-### Modeling with JOJO
+### Modeling in OBNT
 
-JOJO (JSON Object Java Object) eliminates the traditional trade-off 
-between typed Java models and dynamic JSON structures.
+**JOJO (JSON Object Java Object)** extends `JsonObject` and unifies typed Java fields 
+with dynamic JSON properties in a single object model.
 
-> JOJO extends `JsonObject`, unifying typed Java fields and dynamic JSON properties within a single object model.
-
+Define a JOJO `Student`:
 ```java
-@Data
 public class Student extends JsonObject {
     private String name;
     private Map<String, Integer> scores;
     private List<Student> friends;
+    // Getters and setters
 }
 ```
+
 Learn more → [Modeling (OBNT)](https://sjf4j.org/docs/modeling)
 
 ### Parsing from JSON
 
-`Sjf4j` is the unified facade for structured data encoding and decoding across multiple formats.
+Use `Sjf4j` to encode and decode structured data across multiple formats through a unified facade.
 ```java
 String json = """
 {
@@ -113,8 +112,9 @@ student.getInteger("age");          // 18
 Learn more → [Parsing (Codec)](https://sjf4j.org/docs/parsing)
 
 ### Navigating with JSON Path
-OBNT enables declarative structural navigation, expressive querying,
-and precise mutation through `JSON Path` or `JSON Pointer`.
+
+Every OBNT node supports declarative structural navigation, expressive querying,
+and precise mutation via `JSON Path` or `JSON Pointer`.
 ```java
 student.getIntegerByPath("$.scores.math");
 // 59
@@ -130,7 +130,7 @@ Learn more → [Navigation (JSON Path)](https://sjf4j.org/docs/navigation)
 
 ### Transforming with JSON Patch
 
-Apply standard-compliant structural updates using `JSON Patch`.
+Every OBNT node supports standard-compliant structural updates via `JSON Patch`.
 ```java
 JsonPatch patch = JsonPatch.fromJson("""
 [
@@ -179,7 +179,6 @@ Declare JSON Schema constraints with `@ValidJsonSchema` (Jakarta Bean Validation
   }
 }
 """)
-@Data
 public class Student extends JsonObject {
     private String name;
     private Map<String, Integer> scores;
@@ -214,10 +213,10 @@ Learn more → [Benchmarks](https://sjf4j.org/docs/benchmarks)
 
 ## Contributing
 Given that JSON has evolved into a well-defined and widely adopted specification,
-SJF4J began as an exploration of what JSON-oriented development might look like in Java.
+SJF4J began as an exploration of what JSON-Oriented Development might look like in Java.
 
-If this idea resonates with you, 
-contributions of all kinds — codes, docs, bugs, discussions, examples, or benchmarks — are welcome~!
+If you find the project interesting,
+contributions of all kinds — code, docs, bug reports, discussions, examples, or benchmarks — are welcome~!
 
 
 
