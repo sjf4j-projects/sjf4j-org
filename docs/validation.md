@@ -132,7 +132,8 @@ They complement each other rather than overlap.
 
 ## High Performance
 In local Bowtie draft 2020-12 benchmarks, 
-SJF4J consistently ranks among the top-performing Java implementations in terms of throughput.
+SJF4J consistently ranks among the top-performing Java implementations. 
+(See [Benchmarks](https://sjf4j.org/docs/benchmarks#json-schema-validation-benchmark))
 
 This performance is primarily due to its direct validation over native object graphs, avoiding:
 - Re-serialization

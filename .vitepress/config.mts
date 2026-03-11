@@ -93,7 +93,7 @@ export default withMermaid(defineConfig({
   },
 
   themeConfig: {
-    logo: '/favicon.svg',
+    logo: '/favicon.svg?v=3',
     siteTitle: 'SJF4J',
 
     nav: [
