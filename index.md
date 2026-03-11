@@ -51,7 +51,7 @@ SJF4J requires `JDK 8` and has no external dependencies.
   </div>
   <div class="feature-card">
     <h3>⚡ Benchmarks</h3>
-    <p>High performance of JSON Parsing, Reflection Access and JSON Schema Validation.</p>
+    <p>Delivers high performance with minimal overhead while providing a unified JSON-semantic processing model.</p>
     <a href="/docs/benchmarks">Learn more</a>
   </div>
 </div>
