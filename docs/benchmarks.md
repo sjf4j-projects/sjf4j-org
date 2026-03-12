@@ -22,49 +22,53 @@ Sample JSON (~1 KB) with nested objects and arrays. Source: [ReadBenchmark.java]
 
 ```text
 Benchmark                           (streamingMode)  Mode  Cnt   Score   Error  Units
-Read.json_jackson_native_has_any                N/A  avgt   10   3.008 ± 0.036  us/op  baseline
-Read.json_jackson_facade_jojo             SHARED_IO  avgt   10   3.217 ± 0.038  us/op
-Read.json_jackson_facade_jojo          EXCLUSIVE_IO  avgt   10   2.869 ± 0.049  us/op  !0.95x faster
-Read.json_jackson_facade_jojo         PLUGIN_MODULE  avgt   10   3.097 ± 0.029  us/op  !1.03x slower
+Read.json_jackson_native_has_any                N/A  avgt   20   3.114 ± 0.123  us/op baseline
+Read.json_jackson_facade_jojo             SHARED_IO  avgt   20   3.145 ± 0.063  us/op
+Read.json_jackson_facade_jojo          EXCLUSIVE_IO  avgt   20   2.845 ± 0.038  us/op !0.91x faster
+Read.json_jackson_facade_jojo         PLUGIN_MODULE  avgt   20   3.055 ± 0.050  us/op !0.98x faster
 
-Read.json_jackson_native_pojo                   N/A  avgt   10   1.595 ± 0.010  us/op  baseline
-Read.json_jackson_facade_pojo             SHARED_IO  avgt   10   2.262 ± 0.015  us/op
-Read.json_jackson_facade_pojo          EXCLUSIVE_IO  avgt   10   2.102 ± 0.019  us/op
-Read.json_jackson_facade_pojo         PLUGIN_MODULE  avgt   10   1.614 ± 0.034  us/op  !1.01x slower
+Read.json_jackson_native_pojo                   N/A  avgt   20   1.661 ± 0.033  us/op baseline
+Read.json_jackson_facade_pojo             SHARED_IO  avgt   20   2.263 ± 0.043  us/op
+Read.json_jackson_facade_pojo          EXCLUSIVE_IO  avgt   20   2.104 ± 0.004  us/op
+Read.json_jackson_facade_pojo         PLUGIN_MODULE  avgt   20   1.627 ± 0.021  us/op !0.98x faster
 
-Read.json_gson_native_pojo                      N/A  avgt   10   2.465 ± 0.016  us/op  baseline
-Read.json_gson_facade_pojo                SHARED_IO  avgt   10   2.566 ± 0.042  us/op
-Read.json_gson_facade_pojo             EXCLUSIVE_IO  avgt   10   2.435 ± 0.030  us/op  !0.98x faster
-Read.json_gson_facade_pojo            PLUGIN_MODULE  avgt   10   2.455 ± 0.038  us/op
+Read.json_gson_facade_jojo                SHARED_IO  avgt   20   3.692 ± 0.056  us/op 
+Read.json_gson_facade_jojo             EXCLUSIVE_IO  avgt   20   3.699 ± 0.065  us/op
+Read.json_gson_facade_jojo            PLUGIN_MODULE  avgt   20   3.782 ± 0.031  us/op
 
-Read.json_fastjson2_native_has_any              N/A  avgt   10   2.098 ± 0.021  us/op  baseline
-Read.json_fastjson2_facade_jojo           SHARED_IO  avgt   10   2.478 ± 0.039  us/op
-Read.json_fastjson2_facade_jojo        EXCLUSIVE_IO  avgt   10   2.363 ± 0.035  us/op  !1.12x slower 
-Read.json_fastjson2_facade_jojo       PLUGIN_MODULE  avgt   10   2.366 ± 0.196  us/op
+Read.json_gson_native_pojo                      N/A  avgt   20   2.560 ± 0.038  us/op baseline
+Read.json_gson_facade_pojo                SHARED_IO  avgt   20   2.644 ± 0.029  us/op
+Read.json_gson_facade_pojo             EXCLUSIVE_IO  avgt   20   2.512 ± 0.018  us/op !0.98x faster
+Read.json_gson_facade_pojo            PLUGIN_MODULE  avgt   20   2.553 ± 0.027  us/op
 
-Read.json_fastjson2_native_pojo                 N/A  avgt   10   0.797 ± 0.010  us/op  baseline
-Read.json_fastjson2_facade_pojo           SHARED_IO  avgt   10   1.471 ± 0.060  us/op
-Read.json_fastjson2_facade_pojo        EXCLUSIVE_IO  avgt   10   1.229 ± 0.016  us/op  !1.53x slower
-Read.json_fastjson2_facade_pojo       PLUGIN_MODULE  avgt   10   2.109 ± 0.040  us/op
+Read.json_fastjson2_native_has_any              N/A  avgt   20   2.215 ± 0.131  us/op baseline
+Read.json_fastjson2_facade_jojo           SHARED_IO  avgt   20   2.666 ± 0.093  us/op
+Read.json_fastjson2_facade_jojo        EXCLUSIVE_IO  avgt   20   2.190 ± 0.020  us/op !0.99x faster
+Read.json_fastjson2_facade_jojo       PLUGIN_MODULE  avgt   20   2.439 ± 0.028  us/op
 
-Read.json_jsonp_facade_jojo               SHARED_IO  avgt   10   4.653 ± 0.005  us/op
-Read.json_jsonp_facade_pojo               SHARED_IO  avgt   10   3.216 ± 0.029  us/op
+Read.json_fastjson2_native_pojo                 N/A  avgt   20   0.773 ± 0.006  us/op baseline
+Read.json_fastjson2_facade_pojo           SHARED_IO  avgt   20   1.472 ± 0.022  us/op
+Read.json_fastjson2_facade_pojo        EXCLUSIVE_IO  avgt   20   1.237 ± 0.013  us/op !1.60 slower
+Read.json_fastjson2_facade_pojo       PLUGIN_MODULE  avgt   20   2.180 ± 0.016  us/op
 
-Read.json_simple_facade_jojo              SHARED_IO  avgt   10   8.265 ± 0.117  us/op
-Read.json_simple_facade_jojo              SHARED_IO  avgt   10   7.529 ± 0.054  us/op
+Read.json_jsonp_facade_jojo               SHARED_IO  avgt   20   4.694 ± 0.061  us/op
+Read.json_jsonp_facade_pojo               SHARED_IO  avgt   20   3.275 ± 0.087  us/op
+
+Read.json_simple_facade_jojo              SHARED_IO  avgt   20   8.372 ± 0.081  us/op
+Read.json_simple_facade_pojo              SHARED_IO  avgt   20   7.635 ± 0.071  us/op
 ```
 
 **Summary**
 
 - **Jackson** — Default `PLUGIN_MODULE`, SJF4J achieves **near-parity performance** with native Jackson.  
-  When parsing JOJO models, SJF4J can even be slightly faster.
+  When using `EXCLUSIVE_IO`, SJF4J can be slightly faster with JOJO, but slower with POJO.
 
 
 - **Gson** — Default `EXCLUSIVE_IO`, SJF4J performs **slightly faster** than the native Gson.   
-  It also supports dynamic properties that Gson’s native POJO binding does not support.
+  Gson’s native POJO binding does not support extra properties, while SJF4J does. 
 
 
-- **Fastjson2** — Default `EXCLUSIVE_IO`, SJF4J introduces about **10–50% overhead** compared to native Fastjson2.  
+- **Fastjson2** — Default `EXCLUSIVE_IO`, SJF4J introduces about **50–60% overhead** compared to native Fastjson2 with POJO.  
   Despite this overhead, Fastjson2 remains among the fastest JSON parsers overall.
 
 
@@ -72,23 +76,27 @@ Read.json_simple_facade_jojo              SHARED_IO  avgt   10   7.529 ± 0.054 
 
 
 > Note: Regardless of the underlying JSON parser, SJF4J ensures consistent behavior at the API level.
-> If you observe any inconsistencies, please report a bug.
 
 ## Reflection Benchmark
 
 SJF4J's OBNT relies on reflection for flexible access to POJO/JOJO/JAJO. Source: [ReflectionBenchmark.java](https://github.com/sjf4j-projects/sjf4j/blob/main/sjf4j/src/jmh/java/org/sjf4j/ReflectionBenchmark.java).
 
 ```text
-Benchmark                                            Mode  Cnt  Score    Error  Units
-ReflectionBenchmark.reflection_ctor_lambda           avgt    5  0.007 ±  0.001  us/op
-ReflectionBenchmark.reflection_ctor_methodHandler    avgt    5  0.008 ±  0.001  us/op
-ReflectionBenchmark.reflection_ctor_native           avgt    5  0.007 ±  0.001  us/op
-ReflectionBenchmark.reflection_getter_lambda         avgt    5  0.005 ±  0.001  us/op
-ReflectionBenchmark.reflection_getter_methodHandler  avgt    5  0.008 ±  0.001  us/op
-ReflectionBenchmark.reflection_getter_native         avgt    5  0.005 ±  0.001  us/op
-ReflectionBenchmark.reflection_setter_lambda         avgt    5  0.007 ±  0.001  us/op
-ReflectionBenchmark.reflection_setter_methodHandler  avgt    5  0.009 ±  0.001  us/op
-ReflectionBenchmark.reflection_setter_native         avgt    5  0.007 ±  0.001  us/op
+Benchmark                                            Mode  Cnt   Score   Error  Units
+ReflectionBenchmark.reflection_ctor_native           avgt   24   6.532 ± 0.512  ns/op baseline
+ReflectionBenchmark.reflection_ctor_reflect          avgt   24  10.107 ± 0.059  ns/op
+ReflectionBenchmark.reflection_ctor_methodHandler    avgt   24   9.156 ± 0.664  ns/op
+ReflectionBenchmark.reflection_ctor_lambda           avgt   24   6.067 ± 0.064  ns/op !0.93 faster?
+
+ReflectionBenchmark.reflection_getter_native         avgt   24   0.648 ± 0.018  ns/op baseline
+ReflectionBenchmark.reflection_getter_reflect        avgt   24   4.184 ± 0.027  ns/op
+ReflectionBenchmark.reflection_getter_methodHandler  avgt   24   3.104 ± 0.034  ns/op
+ReflectionBenchmark.reflection_getter_lambda         avgt   24   0.796 ± 0.024  ns/op !1.23 slower
+
+ReflectionBenchmark.reflection_setter_native         avgt   24   0.764 ± 0.023  ns/op baseline
+ReflectionBenchmark.reflection_setter_reflect        avgt   24   4.376 ± 0.041  ns/op
+ReflectionBenchmark.reflection_setter_methodHandler  avgt   24   3.040 ± 0.006  ns/op
+ReflectionBenchmark.reflection_setter_lambda         avgt   24   0.996 ± 0.007  ns/op !1.30 slower
 ```
 
 **Summary**:  
