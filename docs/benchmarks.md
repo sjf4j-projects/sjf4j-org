@@ -21,7 +21,7 @@ and no single mode is universally optimal.
 Sample JSON (~1 KB) with nested objects and arrays. Source: [ReadBenchmark.java](https://github.com/sjf4j-projects/sjf4j/blob/main/sjf4j/src/jmh/java/org/sjf4j/ReadBenchmark.java)
 
 ```text
-Benchmark                                    (streamingMode)  Mode  Cnt   Score   Error  Units
+Benchmark                           (streamingMode)  Mode  Cnt   Score   Error  Units
 Read.json_jackson_native_has_any                N/A  avgt   10   3.008 ± 0.036  us/op  baseline
 Read.json_jackson_facade_jojo             SHARED_IO  avgt   10   3.217 ± 0.038  us/op
 Read.json_jackson_facade_jojo          EXCLUSIVE_IO  avgt   10   2.869 ± 0.049  us/op  !0.95x faster
