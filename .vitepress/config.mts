@@ -20,6 +20,7 @@ function normalizePath(relativePath: string): string {
 export default withMermaid(defineConfig({
   title: 'SJF4J',
   description: 'Simple JSON Facade for Java — A Unified JSON Semantic Layer',
+  cleanUrls: true,
   ignoreDeadLinks: false,
   srcExclude: ['README.md'],
 

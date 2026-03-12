@@ -112,25 +112,26 @@ Supported schemes:
 Network URLs (e.g. `https://`) are treated as identifiers unless explicitly enabled.
 
 
-## JSON Schema and JSR 380 (Jakarta Validation)
-[JSR 380 (Bean Validation or Jakarta Validation)](https://beanvalidation.org/2.0-jsr380/) focuses on:
-- Annotation-based constraints
-- Static invariants
-- Compile-time domain rules
+## JSON Schema vs JSR 380 (Jakarta Validation)
 
-[JSON Schema](https://json-schema.org/) addresses a different layer:
-- Runtime-configurable validation
-- Conditional logic (`if` / `then` / `else`)
-- Structural constraints
-- Externalized contracts
+Typical separation of responsibilities:
+- **[JSR 380 (Bean / Jakarta Validation)](https://beanvalidation.org/2.0-jsr380/)** → Validates **domain invariants** inside the Java model
+- **[JSON Schema](https://json-schema.org/)** → Validates **runtime data contracts** for structured data
 
-Typical separation:
-- **JSR 380** → Domain invariants
-- **JSON Schema** → Runtime contracts and policies
+| Concern               | JSR 380                      | JSON Schema                                |
+|-----------------------|------------------------------|--------------------------------------------|
+| Primary scope         | Java domain model            | JSON / structured data documents           |
+| Configuration         | Annotations embedded in code | External schema documents                  |
+| Validation style      | Annotation-based constraints | Declarative schema constraints             |
+| Logic capabilities    | Mostly static invariants     | Conditional logic (`if` / `then` / `else`) |
+| Structural validation | Limited                      | Rich structural constraints                |
+| Deployment model      | Compiled with application    | Runtime-configurable                       |
+| Typical usage         | Domain invariants            | Data contracts and policies                |
 
-They complement each other rather than overlap.
+Together, they may form a layered validation model **spanning domain invariants and runtime data contracts.**
 
-## High Performance
+
+## Performance
 In local Bowtie draft 2020-12 benchmarks, 
 SJF4J consistently ranks among the top-performing Java implementations. 
 (See [Benchmarks](https://sjf4j.org/docs/benchmarks#json-schema-validation-benchmark))
