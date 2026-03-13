@@ -43,12 +43,13 @@ All documentation lives in Markdown files:
 | File | Content |
 |---|---|
 | `index.md` | Homepage |
-| `docs/obnt-and-jojo.md` | OBNT & JOJO introduction |
-| `docs/basic-operations.md` | JsonObject, JsonArray, NodeStream |
-| `docs/jsonpath.md` | JsonPath & JsonPointer |
-| `docs/jsonpatch.md` | JsonPatch |
-| `docs/jsonschema.md` | JsonSchema & @ValidJsonSchema |
-| `docs/benchmark.md` | Benchmark results |
+| `docs/getting_started.md` | Docs landing page |
+| `docs/modeling.md` | Modeling (OBNT) |
+| `docs/parsing.md` | Parsing (Codec) |
+| `docs/navigation.md` | Navigation (JSON Path) |
+| `docs/transformation.md` | Transformation (JSON Patch) |
+| `docs/validation.md` | Validation (JSON Schema) |
+| `docs/benchmarks.md` | Benchmark results |
 | `docs/faq.md` | FAQ |
 
 ## Adding a New Page
@@ -89,8 +90,13 @@ sidebar: [
   {
     text: 'Guide',
     items: [
-      { text: 'OBNT & JOJO', link: '/docs/obnt-and-jojo' },
-      { text: 'Basic Operations', link: '/docs/basic-operations' },
+      { text: 'Getting Started', link: '/docs/getting_started' },
+      { text: 'Benchmarks', link: '/docs/benchmarks' },
+      { text: 'Modeling (OBNT)', link: '/docs/modeling' },
+      { text: 'Parsing (Codec)', link: '/docs/parsing' },
+      { text: 'Navigation (JSON Path)', link: '/docs/navigation' },
+      { text: 'Transformation (JSON Patch)', link: '/docs/transformation' },
+      { text: 'Validation (JSON Schema)', link: '/docs/validation' },
       // ...existing items...
       { text: 'New Feature', link: '/docs/new-feature' },   // ← add here
     ],

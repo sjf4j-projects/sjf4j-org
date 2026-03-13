@@ -2,12 +2,14 @@ import DefaultTheme from 'vitepress/theme'
 import { h } from 'vue'
 import type { Theme } from 'vitepress'
 import MavenInstallSnippet from './components/MavenInstallSnippet.vue'
+import MermaidRuntime from './components/MermaidRuntime.vue'
 import './custom.css'
 
 const theme: Theme = {
   extends: DefaultTheme,
   enhanceApp({ app }) {
     app.component('MavenInstallSnippet', MavenInstallSnippet)
+    app.component('Mermaid', MermaidRuntime)
   },
   Layout: () =>
     h(DefaultTheme.Layout, null, {
