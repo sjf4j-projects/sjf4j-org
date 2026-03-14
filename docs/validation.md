@@ -9,7 +9,7 @@ Validation in SJF4J operates directly on OBNT,
 no intermediate JSON serialization or AST conversion is required.
 
 ## Creating and Using `JsonSchema`
-Example: validating with `type`
+Example: validating a value by `type`
 ```java
 JsonSchema schema = JsonSchema.fromJson("""
 {
@@ -22,7 +22,7 @@ assertTrue(schema.isValid(1));
 assertFalse(schema.isValid("a"));
 ```
 
-Example: validating with `properties`
+Example: validating object `properties`
 ```java
 JsonSchema schema = JsonSchema.fromJson("""
 {
@@ -49,8 +49,7 @@ assertFalse(schema.isValid(pojo));                  // POJO validated directly
 
 SJF4J enables declarative schema binding for domain classes.
 
-Annotate a class with `@ValidJsonSchema`,
-then validate instances using `SchemaValidator`.
+Annotate a class with `@ValidJsonSchema`, then validate instances using `SchemaValidator`.
 
 ```java
 @ValidJsonSchema("""
@@ -98,6 +97,8 @@ The default schema base path is
 classpath:///json-schemas/
 ```
 It can be configured if necessary.
+
+
 
 **Convention-Based Resolution**
 
