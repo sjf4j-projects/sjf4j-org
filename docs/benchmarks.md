@@ -32,8 +32,9 @@ Read.json_jackson_facade_pojo             SHARED_IO  avgt   20   2.263 ± 0.043 
 Read.json_jackson_facade_pojo          EXCLUSIVE_IO  avgt   20   2.104 ± 0.004  us/op
 Read.json_jackson_facade_pojo         PLUGIN_MODULE  avgt   20   1.627 ± 0.021  us/op !0.98x faster
 
-Read.json_gson_facade_jojo                SHARED_IO  avgt   20   3.692 ± 0.056  us/op 
-Read.json_gson_facade_jojo             EXCLUSIVE_IO  avgt   20   3.699 ± 0.065  us/op
+-- no baseline
+Read.json_gson_facade_jojo                SHARED_IO  avgt   20   3.692 ± 0.056  us/op !
+Read.json_gson_facade_jojo             EXCLUSIVE_IO  avgt   20   3.699 ± 0.065  us/op !
 Read.json_gson_facade_jojo            PLUGIN_MODULE  avgt   20   3.782 ± 0.031  us/op
 
 Read.json_gson_native_pojo                      N/A  avgt   20   2.560 ± 0.038  us/op baseline
@@ -41,15 +42,15 @@ Read.json_gson_facade_pojo                SHARED_IO  avgt   20   2.644 ± 0.029 
 Read.json_gson_facade_pojo             EXCLUSIVE_IO  avgt   20   2.512 ± 0.018  us/op !0.98x faster
 Read.json_gson_facade_pojo            PLUGIN_MODULE  avgt   20   2.553 ± 0.027  us/op
 
-Read.json_fastjson2_native_has_any              N/A  avgt   20   2.215 ± 0.131  us/op baseline
-Read.json_fastjson2_facade_jojo           SHARED_IO  avgt   20   2.666 ± 0.093  us/op
-Read.json_fastjson2_facade_jojo        EXCLUSIVE_IO  avgt   20   2.190 ± 0.020  us/op !0.99x faster
-Read.json_fastjson2_facade_jojo       PLUGIN_MODULE  avgt   20   2.439 ± 0.028  us/op
+Read.json_fastjson2_native_has_any              N/A  avgt   20   2.174 ± 0.039  us/op baseline
+Read.json_fastjson2_facade_jojo           SHARED_IO  avgt   20   2.481 ± 0.043  us/op
+Read.json_fastjson2_facade_jojo        EXCLUSIVE_IO  avgt   20   2.337 ± 0.048  us/op
+Read.json_fastjson2_facade_jojo       PLUGIN_MODULE  avgt   20   2.232 ± 0.038  us/op !1.03x slower
 
-Read.json_fastjson2_native_pojo                 N/A  avgt   20   0.773 ± 0.006  us/op baseline
-Read.json_fastjson2_facade_pojo           SHARED_IO  avgt   20   1.472 ± 0.022  us/op
-Read.json_fastjson2_facade_pojo        EXCLUSIVE_IO  avgt   20   1.237 ± 0.013  us/op !1.60 slower
-Read.json_fastjson2_facade_pojo       PLUGIN_MODULE  avgt   20   2.180 ± 0.016  us/op
+Read.json_fastjson2_native_pojo                 N/A  avgt   20   0.768 ± 0.004  us/op baseline
+Read.json_fastjson2_facade_pojo           SHARED_IO  avgt   20   1.565 ± 0.119  us/op
+Read.json_fastjson2_facade_pojo        EXCLUSIVE_IO  avgt   20   1.211 ± 0.032  us/op
+Read.json_fastjson2_facade_pojo       PLUGIN_MODULE  avgt   20   0.780 ± 0.006  us/op !1.02x slower
 
 Read.json_jsonp_facade_jojo               SHARED_IO  avgt   20   4.694 ± 0.061  us/op
 Read.json_jsonp_facade_pojo               SHARED_IO  avgt   20   3.275 ± 0.087  us/op
@@ -68,11 +69,11 @@ Read.json_simple_facade_pojo              SHARED_IO  avgt   20   7.635 ± 0.071 
   Gson’s native POJO binding does not support extra properties, while SJF4J does. 
 
 
-- **Fastjson2** — Default `EXCLUSIVE_IO`, SJF4J introduces about **50–60% overhead** compared to native Fastjson2 with POJO.  
-  Despite this overhead, Fastjson2 remains among the fastest JSON parsers overall.
+- **Fastjson2** — Default `PLUGIN_MODULE`, SJF4J achieves **near-parity performance** with native Fastjson2.  
+  Fastjson2 still has a noticeable advantage in POJO binding.
 
 
-- **Absolute performance** (approx.): Fastjson2 > Jackson > Gson > JSON-P (Parsson) > Simple (built-in)
+- **Overall performance** in our benchmarks roughly follows: Fastjson2 > Jackson > Gson > JSON-P (Parsson) > Simple (built-in)
 
 
 > Note: Regardless of the underlying JSON parser, SJF4J ensures consistent behavior at the API level.
